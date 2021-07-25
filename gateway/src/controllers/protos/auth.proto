@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+message signUpRequest {
+  string username = 1;
+  string password = 2;
+}
+
+
+message signUpResponse {
+  string _id = 1;
+  string username = 2;
+  bool success = 3;
+  string message = 4;
+}
+
+message signInRequest {
+  string username = 1;
+  string password = 2;
+}
+
+
+message signInResponse {
+  string _id = 1;
+  bool success = 2;
+  string message = 3;
+  string token = 4;
+}
+
+
+service AuthService {
+  rpc SignUp (signUpRequest) returns (signUpResponse);
+  rpc SignIn (signInRequest) returns (signInResponse);
+}

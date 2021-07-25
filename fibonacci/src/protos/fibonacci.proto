@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+message FibonacciRequest {
+  double num = 1;
+}
+
+
+message FibonacciResponse{
+  double num = 1;
+}
+
+service FibonacciService {
+  rpc Fibonacci (FibonacciRequest) returns (FibonacciResponse);
+}
