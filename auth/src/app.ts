@@ -24,7 +24,7 @@ server.addService(customersProto.AuthService.service, {
   SignUp: signUp,
   SignIn: signIn
 });
-
+console.log(process.env.MONGO_DB)
 mongoose.connect(process.env.MONGO_DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true
