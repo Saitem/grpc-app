@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - db-data:/data/db
+    restart: unless-stopped
+
+  app:
+    build: .
+    image: grpc-app:latest
+
+  auth:
+    image: grpc-app:latest
+    command: /bin/sh -c "node ./dist/apps/auth/src/app.js"
+
+  gateway:
+    image: grpc-app:latest
+    command: /bin/sh -c "node ./dist/apps/gateway/src/app.js"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+
+volumes:
+  db-data:
+    driver: local
